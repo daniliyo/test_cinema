@@ -12,6 +12,7 @@
                 <form method="POST" action="{{ route('genres.update', $genre) }}">
                     @csrf
                     @method('put')
+                    <input type="hidden" name="id" id="id" value="{{ $genre->id }}">
                     <hr>
                     <div class="mb-3">
                         @error('name')

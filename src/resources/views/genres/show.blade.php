@@ -4,6 +4,13 @@
     </head>
     <body>
         <div class="container">
+            <div class="row">
+                @if (Session::has('message'))
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
+            </div>
             <h1>{{ $genre->name }}</h1>
             
             <div>

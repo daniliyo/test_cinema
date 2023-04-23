@@ -9,7 +9,7 @@ class GenreController extends Controller
 {
     public function index()
     {
-        $genres = Genre::all();
+        $genres = Genre::paginate(10);
         return view('genres.index', compact('genres'));
     }
 
@@ -23,7 +23,8 @@ class GenreController extends Controller
         $genre = Genre::create([
             'name' => $request->input('name'),
         ]);
-        return redirect()->route('genres.show', $genre->id);
+        return redirect()->route('genres.show', $genre)
+            ->with('message', 'The genre "'.$genre->name.'" has been successfully added');
     }
 
     public function show(Genre $genre)
@@ -40,12 +41,14 @@ class GenreController extends Controller
     {
         $genre->name = $request->input('name');
         $genre->save();
-        return redirect()->route('genres.show', $genre->id);
+        return redirect()->route('genres.show', $genre)
+            ->with('message', 'The genre "'.$genre->name.'" has been successfully updated');
     }
 
     public function destroy(Genre $genre)
     {
         $genre->delete();
-        return redirect()->route('genres.index');
+        return redirect()->route('genres.index')
+            ->with('message', 'The genre "'.$genre->name.'" has been successfully deleted');
     }
 }
