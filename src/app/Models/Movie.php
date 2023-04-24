@@ -15,6 +15,7 @@ class Movie extends Model
         'description',
         'release_date',
     ];
+    protected $hidden = ['pivot', 'created_at', 'updated_at'];
 
     public function genres(){
         return $this->belongsToMany(Genre::class);
